@@ -8,7 +8,6 @@ import json
 import asyncio
 
 # Define the base for ORM mapping
-Base = declarative_base()
 
 # Get the current working directory and the path to the virtual environment
 path = os.getcwd() + '\\venv'
@@ -26,6 +25,7 @@ with open(path + '\\logger_config.json', 'r') as f:
 logging.config.dictConfig(config)
 
 # Create an instance of the MusicLibrary
+from repository.models import Base
 music_library = MusicLibrary(DATABASE_FOLDER, Base, logging.getLogger(__name__))
 
 # Run the create_tables method asynchronously
