@@ -1,0 +1,45 @@
+{
+    "version": 1,
+    "formatters": {
+      "detailed": {
+        "class": "logging.Formatter",
+        "format": "%(asctime)s %(levelname)-8s [%(name)s] %(message)s",
+        "datefmt": "%Y-%m-%d %H:%M:%S"
+      }
+    },
+    "handlers": {
+      "file_handler": {
+        "class": "logging.handlers.WatchedFileHandler",
+        "level": "ERROR",
+        "formatter": "detailed",
+        "filename": "logs/app.log",
+        "mode": "a",
+        "delay": true
+      },
+      "console_handler": {
+        "class": "logging.StreamHandler",
+        "level": "INFO",
+        "formatter": "detailed",
+        "stream": "ext://sys.stdout"
+      }
+    },
+    "loggers": {
+      "": {
+        "handlers": ["file_handler", "console_handler"],
+        "level": "INFO",
+        "propagate": true
+      }
+    },
+    "root": {
+      "level": "INFO"
+    },
+    "disable_existing_loggers": false,
+    "filters": {},
+    "colors": {
+      "DEBUG": "cyan",
+      "INFO": "green",
+      "WARNING": "yellow",
+      "ERROR": "red",
+      "CRITICAL": "red,bg_yellow"
+    }
+  }

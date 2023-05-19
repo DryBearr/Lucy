@@ -1,0 +1,22 @@
+{
+    "VIDEO": {
+        "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+        "merge_output_format": "mp4",
+        "outtmpl": "${project_directory}/Yt-dlp/Video/%(title)s.%(ext)s",
+        "ignoreerrors": true,
+        "ffmpeg_location": "${ffmpeg_location}"
+    },
+    "AUDIO": {
+        "format": "bestaudio",
+        "outtmpl": "${project_directory}/Yt-dlp/Music/%(title)s.%(ext)s",
+        "ignoreerrors": true,
+        "ffmpeg_location": "${ffmpeg_location}",
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "192"
+            }
+        ]
+    }
+}
