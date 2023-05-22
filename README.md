@@ -9,7 +9,7 @@ To use Lucy, you need to create a `config.cfg` file in the bot's directory with 
 - **music_download_folder:** The folder where music files will be downloaded.
 - **database_folder:** The folder where the bot's database files will be stored.
 - **discord_token:** Your Discord bot token. Obtain this from the Discord Developer Portal.
-- **yt_dlp_download_options:** Download options for the `yt-dlp` library. Specify any additional flags or parameters here.
+- **yt_dlp_download_options:** Download options for the `yt-dlp` library. Specify any additional flags or parameters here. (if you're gonna change options use my venv/utils/download_options.json as a template :3)
 - **ffmpeg_execute_folder:** The folder where the `ffmpeg` executable is located.
 - **chrome_driver_path:** The path to the ChromeDriver executable, if needed for any functionality.
 
@@ -28,4 +28,3 @@ If you have any questions or need assistance, feel free to reach out to my Disco
 Please refer to the bot's documentation or README file for more detailed instructions on setup, dependencies, and usage.
 
 Enjoy using Lucy for your Discord server!
-
