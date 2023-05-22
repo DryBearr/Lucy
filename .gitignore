@@ -1,9 +1,9 @@
 config.cfg
 # Ignore the Download folder
-Download*/
+Downloads*/
 
 # Ignore the Database folder
-Database*/
+Databases*/
 
 # Ignore the .vscode folder
 .vscode*/

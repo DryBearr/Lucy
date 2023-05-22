@@ -41,11 +41,6 @@ logging.config.dictConfig(config)
 from utils.yt_dlp_downloader_utils import YtDlpDownloader
 downloader = YtDlpDownloader(options, logging.getLogger(__name__))
 
-# Create the MusicPlayer object
-from utils.music_player_utils import MusicPlayer
-from repository import music_library
-music_player = MusicPlayer(music_library, downloader, logging.getLogger(__name__))
-
 # Create the ThreadManager object
 from utils.threading_utils import  ThreadManager
 thread_manager = ThreadManager(logging.getLogger(__name__))
