@@ -7,7 +7,6 @@ import traceback
 from discord.ext import commands
 from discord_bot import FFMPEG_EXECUTE_FOLDER
 from utils.threading_utils import ThreadManager
-from utils.music_player_utils import MusicPlayer
 from repository.lucy_repository import MusicLibrary
 from repository.lucy_repository import  MusicLibrary
 from utils.yt_dlp_downloader_utils import YtDlpDownloader
