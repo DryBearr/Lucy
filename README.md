@@ -23,6 +23,9 @@ Make sure to populate the `config.cfg` file with the appropriate values for each
 4. Run the bot using your preferred method (e.g., executing a specific file or using a command).
 5. Lucy is now ready to join your Discord server!
 
+If you have any questions or need assistance, feel free to reach out to my Discord profile: DryBear#7945
+
 Please refer to the bot's documentation or README file for more detailed instructions on setup, dependencies, and usage.
 
 Enjoy using Lucy for your Discord server!
+
