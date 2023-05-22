@@ -1,1 +1,1 @@
-# Luccy
+# Lucy
