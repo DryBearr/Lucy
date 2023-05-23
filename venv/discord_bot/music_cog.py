@@ -10,7 +10,7 @@ from utils.threading_utils import ThreadManager
 from repository.lucy_repository import MusicLibrary
 from repository.lucy_repository import  MusicLibrary
 from utils.yt_dlp_downloader_utils import YtDlpDownloader
-from utils.data_scrapper_utils import find_urls, get_video_id_from_url, get_videIds_from_title, get_video_ids_from_playlist
+from utils.data_scrapper_utils import find_urls, get_video_id_from_url, get_video_ids_from_title, get_video_ids_from_playlist
 
 class MusicCog(commands.Cog):
     def __init__(self,
@@ -25,7 +25,7 @@ class MusicCog(commands.Cog):
         self._downloader = downloader
         self._logger = logging
         self._queue = []
-        self.current_song = None
+        self._current_song = None
 
 #--------- bot commands ---------
     @commands.Cog.listener()
@@ -94,7 +94,7 @@ class MusicCog(commands.Cog):
         urls = find_urls(string)
         song_ids = []
         if urls == []:
-            song_ids = [get_videIds_from_title(string)]
+            song_ids = [get_video_ids_from_title(string)]
         else:
             for url in urls:
                 if 'list' in url[0]:
@@ -152,7 +152,7 @@ class MusicCog(commands.Cog):
             voice_client (discord.VoiceClient): Voice client to play the song.
         """
         if os.path.exists(song_path):  # Check if the song exists
-            self.current_song = voice_client  # Set the currently playing song
+            self._current_song = voice_client  # Set the currently playing song
 
             # Create a discord.FFmpegPCMAudio source from the song path
             source = discord.FFmpegPCMAudio(song_path, executable=FFMPEG_EXECUTE_FOLDER)
@@ -169,14 +169,14 @@ class MusicCog(commands.Cog):
         """
         Skip the currently playing song.
         """
-        if self.current_song is not None:  # If a song is currently playing
-            self.current_song.stop()  # Stop the current song
-            self.current_song = None  # Set the current song to None
+        if self._current_song is not None:  # If a song is currently playing
+            self._current_song.stop()  # Stop the current song
+            self._current_song = None  # Set the current song to None
 
     def _download_song(self, song_ids:list[str], voice_client):
             for song_id in song_ids:
                 song_info = self._downloader.download('https://youtu.be/' + song_id, option='AUDIO').pop(0)
-                asyncio.run(self._music_library.add_music(id=song_id[0], title=song_info['title'], path=song_info['requested_downloads'][0]['filepath']))
+                asyncio.run(self._music_library.add_music(id=song_id, title=song_info['title'], path=song_info['requested_downloads'][0]['filepath']))
                 self._queue.append((song_info['requested_downloads'][0]['filepath'], voice_client,))
 
     async def _clear(self):
