@@ -72,7 +72,7 @@ def get_video_id_from_url(url:str) -> str:
     """
     return VIDEO_ID_URL_REGEX.findall(url)[0]
 
-# def get_video_ids_from_playlist(url:str)-> list[str]: # does not work :(
+# def get_video_ids_from_playlist(url:str)-> list[str]: # does not work :( it adds more video IDs than should be
 #     """
 #     Retrieves video IDs from a YouTube playlist based on the given playlist URL.
 
