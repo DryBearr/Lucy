@@ -1,10 +1,10 @@
 import re
 import requests
-import yt_dlp 
+import yt_dlp
 from bs4 import BeautifulSoup
 from utils import URL_REGEX, VIDEO_ID_HTML_REGEX, PLAYLIST_ID_URL_REGEX, VIDEO_ID_URL_REGEX
 
-def get_videIds_from_title(title: str) -> list[str]:
+def get_video_ids_from_title(title: str) -> list[str]:
     """
     Retrieves video IDs from YouTube search results based on a given title.
 
@@ -70,4 +70,4 @@ def get_video_id_from_url(url:str) -> str:
     Returns:
         The video ID.
     """
-    return VIDEO_ID_URL_REGEX.findall(url)
+    return VIDEO_ID_URL_REGEX.findall(url)[0]
