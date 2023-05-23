@@ -80,6 +80,10 @@ class MusicCog(commands.Cog):
 
     @commands.command()
     async def play(self, ctx: commands.Context, *args):
+        """
+        plays song in voice channel
+        use title, youtube url to get the song
+        """
         voice_channel = ctx.author.voice.channel
         if voice_channel is None:
             await ctx.send('You need to be in a voice channel to use this command')
@@ -106,9 +110,24 @@ class MusicCog(commands.Cog):
 
     @commands.command()
     async def skip(self, ctx: commands.Context):
+        """
+        skips the song
+        """
         await self._skip()
         await ctx.send("SKIPPED!")
 
+    @commands.command()
+    async def clear_queue(self, ctx: commands.Context):
+        """
+        Clear the music queue.
+        """
+        self._queue.clear()  # Clear the queue
+        self._logger.info(f'Now Queue is empty')
+        await ctx.send("now queue is empty :3!!!")
+
+    @commands.command()
+    async def get_queue(self, ctx: commands.Context):
+        pass
 #--------- functions ---------
     async def _add(self, ids: list[str], voice_client):
             """
@@ -173,15 +192,9 @@ class MusicCog(commands.Cog):
             self._current_song.stop()  # Stop the current song
             self._current_song = None  # Set the current song to None
 
+
     def _download_song(self, song_ids:list[str], voice_client):
             for song_id in song_ids:
                 song_info = self._downloader.download('https://youtu.be/' + song_id, option='AUDIO').pop(0)
                 asyncio.run(self._music_library.add_music(id=song_id, title=song_info['title'], path=song_info['requested_downloads'][0]['filepath']))
                 self._queue.append((song_info['requested_downloads'][0]['filepath'], voice_client,))
-
-    async def _clear(self):
-        """
-        Clear the music queue.
-        """
-        self._queue.clear()  # Clear the queue
-        self._logger.info(f'Now Queue is empty')
