@@ -4,7 +4,7 @@ Lucy is a versatile Discord bot designed to provide various functionalities, inc
 
 ## Configuration
 
-To use Lucy, you need to create a `config.cfg` file in the bot's directory with the following information:
+To use Lucy, you need to create a `config.cfg` file in the bot's directory (`/venv folder`) with the following information:
 
 - **music_download_folder:** The folder where music files will be downloaded.
 - **database_folder:** The folder where the bot's database files will be stored.

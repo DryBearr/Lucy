@@ -26,6 +26,7 @@ class MusicCog(commands.Cog):
         self._logger = logging
         self._queue = []
         self._current_song = None
+        self._is_loop = False
 
 #--------- bot commands ---------
     @commands.Cog.listener()
@@ -119,7 +120,7 @@ class MusicCog(commands.Cog):
     @commands.command()
     async def clear_queue(self, ctx: commands.Context):
         """
-        Clear the music queue.
+        Clears the music queue.
         """
         self._queue.clear()  # Clear the queue
         self._logger.info(f'Now Queue is empty')
@@ -127,7 +128,26 @@ class MusicCog(commands.Cog):
 
     @commands.command()
     async def get_queue(self, ctx: commands.Context):
-        pass
+        """
+        shows list of songs in the queue
+        """
+        temp = ""
+        i = 1
+        for item in self._queue:
+            temp += f'{i}. ' + item[0][item[0].rfind('\\') + 1:-4] + '\n'
+            i += 1
+
+        await ctx.send(f'```{"Empty! :3" if temp == "" else temp}```')
+
+    @commands.command()
+    async def loop(self, ctx: commands.Context):
+        """
+        turns loop on and off
+        """
+        self._is_loop = not self._is_loop
+        message = 'now loop is turned on! :3' if self._is_loop else 'now loop is turned off! :3'
+        await ctx.send(message)
+
 #--------- functions ---------
     async def _add(self, ids: list[str], voice_client):
             """
@@ -170,7 +190,8 @@ class MusicCog(commands.Cog):
             song_path (str): Path to the song file.
             voice_client (discord.VoiceClient): Voice client to play the song.
         """
-        if os.path.exists(song_path):  # Check if the song exists
+        exists = os.path.exists(song_path)
+        if exists:  # Check if the song exists
             self._current_song = voice_client  # Set the currently playing song
 
             # Create a discord.FFmpegPCMAudio source from the song path
@@ -181,7 +202,10 @@ class MusicCog(commands.Cog):
             while voice_client.is_playing():  # Wait for the song to finish playing
                 await asyncio.sleep(1)
 
-        else:  # If the music doesn't exist, add it back to the end of the queue
+            if self._is_loop: # if loop is turned on
+                self._queue.append((song_path, voice_client))
+
+        elif not exists :  # If the music doesn't exist, add it back to the end of the queue
             self._queue.append((song_path, voice_client))
 
     async def _skip(self):
