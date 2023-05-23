@@ -2,7 +2,7 @@ import re
 import requests
 import yt_dlp
 from bs4 import BeautifulSoup
-from utils import URL_REGEX, VIDEO_ID_HTML_REGEX, PLAYLIST_ID_URL_REGEX, VIDEO_ID_URL_REGEX
+from utils import URL_REGEX, VIDEO_ID_HTML_REGEX, PLAYLIST_ID_URL_REGEX, VIDEO_ID_URL_REGEX #, PLAYLIST_VIDEO_IDS_HTML_REGEX
 
 def get_video_ids_from_title(title: str) -> list[str]:
     """
@@ -71,3 +71,20 @@ def get_video_id_from_url(url:str) -> str:
         The video ID.
     """
     return VIDEO_ID_URL_REGEX.findall(url)[0]
+
+# def get_video_ids_from_playlist(url:str)-> list[str]: # does not work :(
+#     """
+#     Retrieves video IDs from a YouTube playlist based on the given playlist URL.
+
+#     Args:
+#         url: The URL of the YouTube playlist.
+
+#     Returns:
+#         A list of video IDs.
+#     """
+
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.content, 'lxml')
+#     content = soup.select_one('script:-soup-contains("var ytInitialData = ")').contents[0]
+
+#     return PLAYLIST_VIDEO_IDS_HTML_REGEX.findall(content)

@@ -20,6 +20,7 @@ URL_REGEX = re.compile(r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{
 VIDEO_ID_HTML_REGEX = re.compile(r'{"videoRenderer":{"videoId":"([^"]+)')
 PLAYLIST_ID_URL_REGEX = re.compile(r'list=([a-zA-Z0-9_-]+)')
 VIDEO_ID_URL_REGEX = re.compile(r'v=([a-zA-Z0-9_-]+)')
+#PLAYLIST_VIDEO_IDS_HTML_REGEX = re.compile(r'"watchEndpoint":{"videoId":"([A-Za-z0-9]+)"') # doesn't work :(
 
 # Load download options from JSON file
 with open(path + '\\utils' + '\\download_options.json', 'r') as f:
